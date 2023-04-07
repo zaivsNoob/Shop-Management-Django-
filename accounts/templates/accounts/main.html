@@ -1,0 +1,35 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Home{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'accounts/css/main.css' %}"> 
+     <link rel="stylesheet" href="{% static 'accounts/css/nav.css' %}"> 
+     {% block css %}{% endblock css %}
+</head>
+<body>
+     {% include 'accounts/navbar.html' %} 
+    
+        
+        
+            <main>
+                {% block content %}
+                
+                {% endblock content %}
+            </main>
+          
+
+   
+
+
+    <footer>
+        our footer
+    </footer>
+
+   
+    
+    
+</body>
+</html>

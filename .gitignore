@@ -1,0 +1,21 @@
+# Ignore database files
+*.sqlite3
+*.db
+
+# Ignore logs
+logs/
+*.log
+
+# Ignore static and media files
+static/
+media/
+
+# Ignore user-specific files
+.vscode/
+.idea/
+
+# Ignore compiled files
+*.pyc
+*.pyo
+*.pyd
+__pycache__/

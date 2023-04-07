@@ -1,0 +1,77 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+
+
+{% block css %}<link rel="stylesheet" href="{% static 'accounts/css/dashboard.css' %}"> {% endblock css %}
+{% block content %}
+<h1>Customers</h1>
+        <table>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for customer in customers %}
+                <tr>
+                <td>{{ customer.name }}- <a href={% url 'customer' customer.id %}>View</a></td>
+                <td>{{ customer.phone }}</td>
+                <td>{{ customer.email }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <h1>Products</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for product in products %}
+        <tr>
+          <td>{{ product.name }}</td>
+          <td>{{ product.category }}</td>
+          <td>{{ product.price }}tk/-</td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="3">No products found.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h1>Orders</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>Customer</th>
+        <th>Product</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for order in orders %}
+        <tr>
+          <td>{{ order.customer.name }}</td>
+          <td>{{ order.product }}</td>
+          <td>{{ order.status }}</td>
+          <td><a href="{% url 'update' order.id %}">update</a>
+             <a href="{% url 'delete' order.id %}">delete</a> 
+          </td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="3">No orders found.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

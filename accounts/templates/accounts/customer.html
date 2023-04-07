@@ -1,0 +1,12 @@
+{% extends 'accounts/main.html' %}
+{% load static %}
+{% block title %}Customer{% endblock title %}
+
+ {% block css %}<link rel="stylesheet" href="{% static 'accounts/css/customer.css' %}"> {% endblock css %}
+    {% block content  %}
+    
+    <h2>{{customer.name }}</h2>
+        
+        
+   
+    {% endblock content  %}
