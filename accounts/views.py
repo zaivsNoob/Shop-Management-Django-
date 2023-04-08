@@ -1,6 +1,8 @@
 from django.shortcuts import render,redirect
 from .models import *
 from .forms import OrderForm
+from .filters import OrderFilter
+
 # Create your views here.
 
 
@@ -27,9 +29,10 @@ def product(request):
 def customer(request,pk):
     customer=Customer.objects.get(id=pk)
     orders=customer.order_set.all()
-
+    order_filter=OrderFilter(request.GET,queryset=orders)
+    orders=order_filter.qs
     context={
-        'customer':customer,'orders':orders
+        'customer':customer,'orders':orders,'order_filter':order_filter
     }
     return render(request,'accounts/customer.html',context)
 
@@ -52,6 +55,9 @@ def createOrder(request):
         'form':form
     }    
     return  render(request,'accounts/create_order.html',context) 
+
+
+
 
 def updateOrder(request,pk):
     order=Order.objects.get(id=pk)

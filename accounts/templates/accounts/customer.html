@@ -5,8 +5,40 @@
  {% block css %}<link rel="stylesheet" href="{% static 'accounts/css/customer.css' %}"> {% endblock css %}
     {% block content  %}
     
-    <h2>{{customer.name }}</h2>
-        
+    <h2>{{ customer.name }}</h2>
+
+
+    <form method="get">
+        {{order_filter.form}}
+        <button type="submit">Filter</button>
+    </form>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Status</th>
+          <th>Date Created</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for order in orders %}
+          <tr>
+            <td>{{ order.product }}</td>
+            <td>{{ order.status }}</td>
+            <td>{{ order.date_created }}</td>
+            <td><a href="{% url 'update' order.id %}">update</a>
+               <a href="{% url 'delete' order.id %}">delete</a> 
+            </td>
+          </tr>
+        {% empty %}
+          <tr>
+            <td colspan="3">No orders found.</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    
         
    
     {% endblock content  %}
