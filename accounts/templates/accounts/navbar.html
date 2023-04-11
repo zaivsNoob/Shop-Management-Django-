@@ -5,6 +5,7 @@
        <li> <a href="/">dashshboard</a>  </li>
        <li> <a href="/products">products</a>  </li>
        <li> <a href="/customer">Customer</a>  </li>
-       
+       <li><a href="{% url 'logout' %}">Logout</a></li>
+       <li>Hey {{request.user}}</li>
     </ul>
 </nav>
