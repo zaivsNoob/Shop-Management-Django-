@@ -4,13 +4,12 @@ from .forms import OrderForm,CreateUserForm
 from .filters import OrderFilter
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
-
+from .decorators import unAutehnticated,adminOnly
 
 # Create your views here.
-
+@unAutehnticated
 def registerUser(request):
-    if request.user.is_authenticated:
-        return redirect('home')
+   
     form=CreateUserForm()
 
     if(request.method=='POST'):
@@ -28,10 +27,9 @@ def registerUser(request):
 
 
 
-
+@unAutehnticated
 def loginUser(request):
-    if request.user.is_authenticated:
-        return redirect('home')
+    
     if request.method=="POST":
         username=request.POST.get('username')
         password=request.POST.get('password')
@@ -55,6 +53,7 @@ def logoutUser(request):
 
 
 @login_required(login_url='login')
+@adminOnly(roles=["Admin"])
 def home(request):
     customers=Customer.objects.all()
     orders=Order.objects.all()
